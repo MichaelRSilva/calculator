@@ -1,6 +1,6 @@
-# Calculator
+# CalculatorMS
 
-CalculatorMC - FreeCodeCamp's Front-End Project. The following tools / frameworks / technologies are being used:
+CalculatorMS - FreeCodeCamp's Front-End Project. The following tools / frameworks / technologies are being used:
 
 * HTML5
 * CSS3
@@ -50,4 +50,4 @@ IE 9+ ✔ | Latest ✔ | Latest ✔ | Latest ✔ | Latest ✔ |
 
 ## License
 
-This project is licensed under the terms of the [MIT License](https://github.com/MichaelRSilva/calculator/blob/master/LICENSE) © Michael Silva
+This project is licensed under the terms of the [MIT License](https://github.com/MichaelRSilva/calculatorMS/blob/master/LICENSE) © Michael Silva
