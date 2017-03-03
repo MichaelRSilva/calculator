@@ -3,7 +3,7 @@
  */
 
 angular
-    .module('calculatorMC')
+    .module('calculatorMS')
     .config(config);
 
 function config($routeProvider, $sceDelegateProvider) {

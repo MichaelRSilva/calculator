@@ -5,51 +5,51 @@
 
         <div class="frame-display">
 
-            <img src="dist/img/backspace.svg" class="backspace" title="Backspace" alt="Backspace">
+            <img src="dist/img/backspace.svg" ng-dblclick="clearAll();" ng-click="clearCurrent();" class="backspace" title="Backspace" alt="Backspace">
 
             <div class="real-display">
                 <div class="history-digits">
-                    10+32
+                    {{historyDisplay}}
                 </div>
                 <div class="current-digits">
-                    572
+                    {{currentDisplay}}
                 </div>
 
             </div>
         </div>
 
         <ul class="frame-top-operators">
-            <li>÷</li>
-            <li>×</li>
-            <li>-</li>
-            <li>+</li>
+            <li ng-click="keyClick('÷');">÷</li>
+            <li ng-click="keyClick('×');">×</li>
+            <li ng-click="keyClick('-');">-</li>
+            <li ng-click="keyClick('+');">+</li>
         </ul>
 
         <ul class="digits-commom-line">
-            <li>7</li>
-            <li>8</li>
-            <li>9</li>
-            <li>(</li>
+            <li ng-click="keyClick(7);">7</li>
+            <li ng-click="keyClick(8);">8</li>
+            <li ng-click="keyClick(9);">9</li>
+            <li ng-click="keyClick('(');">(</li>
         </ul>
         <ul class="digits-commom-line">
-            <li>4</li>
-            <li>5</li>
-            <li>6</li>
-            <li>)</li>
+            <li ng-click="keyClick(4);">4</li>
+            <li ng-click="keyClick(5);">5</li>
+            <li ng-click="keyClick(6);">6</li>
+            <li ng-click="keyClick(')');">)</li>
         </ul>
 
         <ul class="digits-small-line">
-            <li>3</li>
-            <li>2</li>
-            <li>1</li>
+            <li ng-click="keyClick(3);">3</li>
+            <li ng-click="keyClick(2);">2</li>
+            <li ng-click="keyClick(1);">1</li>
         </ul>
 
         <ul class="digits-small-line last-line">
-            <li class="double-x">0</li>
-            <li>.</li>
+            <li class="double-x" ng-click="keyClick(0);">0</li>
+            <li ng-click="keyClick('.');">.</li>
         </ul>
 
-        <div class="operator-equal">=</div>
+        <div class="operator-equal" ng-click="executeCurrentOperation()">=</div>
 
     </div>
 
