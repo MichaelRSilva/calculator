@@ -8,13 +8,9 @@
             <img src="dist/img/backspace.svg" ng-dblclick="clearAll();" ng-click="clearCurrent();" class="backspace" title="Backspace" alt="Backspace">
 
             <div class="real-display">
-                <div class="history-digits">
-                    {{historyDisplay}}
-                </div>
-                <div class="current-digits">
-                    {{currentDisplay}}
-                </div>
-
+                <input type="text" class="history-digits" ng-hide="showError" readonly ng-model="historyDisplay">
+                <input type="text" class="current-digits" ng-hide="showError" readonly ng-model="currentDisplay">
+                <div class="error-display" ng-show="showError">{{msgErrorDisplay}}</div>
             </div>
         </div>
 

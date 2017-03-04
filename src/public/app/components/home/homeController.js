@@ -14,6 +14,25 @@ function homeController($scope) {
     $scope.currentDisplay = "0";
     $scope.operators      = ['÷','×','-','+'];
     $scope.executed       = false;
+    $scope.showError      = false;
+
+
+    function showErrorMessage(msg) {
+        $scope.showError       = true;
+        $scope.msgErrorDisplay = msg
+    }
+
+    function hideErrorMessage(clearAll) {
+        if($scope.showError) {
+            $scope.showError       = false;
+            $scope.msgErrorDisplay = "";
+
+            if(clearAll){
+                $scope.clearAll();
+            }
+        }
+    }
+
 
     function beforeEval(str) {
         str = str.replace(new RegExp("÷", 'g'), "/");
@@ -27,17 +46,17 @@ function homeController($scope) {
     }
 
     function deleteLastToken(){
-
         var found = false;
         var res   = "";
 
         for(var i=$scope.historyDisplay.length-1; i >=0 ; i--){
-            if($scope.operators.indexOf($scope.historyDisplay.charAt(i)) > -1){
+
+            if($scope.operators.indexOf($scope.historyDisplay.charAt(i)) > -1 && !found){
                 found = true;
             }
 
             if(found){
-                res = $scope.historyDisplay.charAt(i) + res;
+                res = $scope.historyDisplay.charAt(i-1) + res;
             }
         }
 
@@ -48,10 +67,11 @@ function homeController($scope) {
         $scope.currentDisplay  = "0";
         $scope.historyDisplay  = "0";
         $scope.executed = false;
+
+        hideErrorMessage(false);
     };
 
     $scope.clearCurrent = function() {
-
         $scope.currentDisplay  = "0";
         deleteLastToken();
 
@@ -59,20 +79,26 @@ function homeController($scope) {
             $scope.clearAll();
         }
 
+        hideErrorMessage(true);
     };
 
 
     $scope.executeCurrentOperation = function () {
 
-        var res = eval(beforeEval($scope.historyDisplay));
+        try {
+            var res = eval(beforeEval($scope.historyDisplay));
 
-        if(isFloat(res)){
-            res = res.toFixed(3);
+            if(isFloat(res)){
+                res = res.toFixed(3);
+            }
+
+            $scope.currentDisplay  = res;
+            $scope.historyDisplay  += "=" + res;
+            $scope.executed        = true;
+
+        }catch(err) {
+            showErrorMessage("Invalid Operation!");
         }
-
-        $scope.currentDisplay  = res;
-        $scope.historyDisplay  += "=" + res;
-        $scope.executed        = true;
 
     };
 
@@ -80,10 +106,21 @@ function homeController($scope) {
 
         value = value.toString();
 
-        //Limit of the calculator's display
-        if($scope.currentDisplay.length == 9){
+        hideErrorMessage(true);
+
+        //Limit of the history display
+        if($scope.historyDisplay.length == 20){
+            showErrorMessage("Data limit met!");
             return;
         }
+
+        //Limit of the calculator's display
+        if($scope.currentDisplay.length == 9 && $scope.operators.indexOf(value) == -1){
+            return;
+        }
+
+        //console.log($scope.historyDisplay.length);
+
 
         //When the user to click at the operator
         if($scope.operators.indexOf(value) > -1){
@@ -93,7 +130,7 @@ function homeController($scope) {
 
                 $scope.historyDisplay = $scope.currentDisplay + value;
                 $scope.currentDisplay = value;
-                $scope.executed = false;
+                $scope.executed       = false;
 
                 return;
             }
