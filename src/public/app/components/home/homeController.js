@@ -16,6 +16,13 @@ function homeController($scope) {
     $scope.executed       = false;
     $scope.showError      = false;
 
+    $scope.dragOptions = {
+        start: function(e) {},
+        drag: function(e) {},
+        stop: function(e) {},
+        container: 'calculator'
+    };
+
 
     function showErrorMessage(msg) {
         $scope.showError       = true;
