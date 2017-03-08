@@ -6,6 +6,7 @@ CalculatorMS - FreeCodeCamp's Front-End Project. The following tools / framework
 * CSS3
 * SASS
 * Gulp
+* AngularJS
 
 ## Team
 
